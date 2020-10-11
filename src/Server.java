@@ -17,8 +17,15 @@ public class Server {
 
 
                 ) {
-                    String msg = input.readUTF();
-                    System.out.println(msg);
+
+                    boolean connectionLive = true;
+                    while(connectionLive == true){
+
+                        String msg = input.readUTF();
+                        System.out.println(msg);
+
+                    }
+
                 }
             }
 

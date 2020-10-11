@@ -19,6 +19,9 @@ public class frmClient extends javax.swing.JFrame {
 
     static final String IP = "127.0.0.1";
     static final int PORT = 34522;
+    private static String message;
+    private String userName;
+
 
     /**
      * Creates new form frmClient
@@ -83,8 +86,18 @@ public class frmClient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_SendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SendActionPerformed
-        // TODO add your handling code here:
+        
+         message = txtField_Message.getText();
+         updateTextArea();
+
+
     }//GEN-LAST:event_btn_SendActionPerformed
+    
+    
+    private void updateTextArea(){
+        userName = "Mo";
+        txtArea.append(userName + ": " + message + "\n");
+    }
 
 
     private static void run(){
@@ -98,13 +111,15 @@ public class frmClient extends javax.swing.JFrame {
             )
 
         {
-            String ya = JOptionPane.showInputDialog("Enter something");
-            output.writeUTF(ya);
-            isConnected = true;
+            while(true) {
+                Thread.sleep(5000);
+                output.writeUTF(message);
+            }
+
 
 
         }
-        catch(IOException e){
+        catch(IOException | InterruptedException e){
 
             System.out.println("IOException");
             }
@@ -162,7 +177,7 @@ public class frmClient extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Send;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea txtArea;
+    public javax.swing.JTextArea txtArea;
     private javax.swing.JTextField txtField_Message;
     // End of variables declaration//GEN-END:variables
 }
