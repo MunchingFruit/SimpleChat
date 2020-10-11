@@ -14,6 +14,8 @@ public class Server {
                         Socket socket = server.accept();
                         DataInputStream input = new DataInputStream(socket.getInputStream());
                         DataOutputStream output = new DataOutputStream(socket.getOutputStream());
+
+
                 ) {
                     String msg = input.readUTF();
                     System.out.println(msg);

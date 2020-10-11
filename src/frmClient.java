@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import javax.swing.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -86,7 +87,7 @@ public class frmClient extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_SendActionPerformed
 
 
-    private static boolean connect(){
+    private static void run(){
         boolean isConnected = false;
 
         try(
@@ -97,9 +98,10 @@ public class frmClient extends javax.swing.JFrame {
             )
 
         {
-            Scanner scan = new Scanner(System.in);
-            String ya = scan.next();
+            String ya = JOptionPane.showInputDialog("Enter something");
             output.writeUTF(ya);
+            isConnected = true;
+
 
         }
         catch(IOException e){
@@ -107,7 +109,7 @@ public class frmClient extends javax.swing.JFrame {
             System.out.println("IOException");
             }
 
-        return isConnected;
+
     }
 
 
@@ -149,7 +151,7 @@ public class frmClient extends javax.swing.JFrame {
         });
 
 
-        connect();
+        run();
 
 
 
