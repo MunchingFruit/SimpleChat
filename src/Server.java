@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+
 public class Server {
 
     private static void run(){
@@ -38,11 +39,25 @@ public class Server {
 
 
 
+
+
     public static void main(String[] args) {
 
         run();
 
+
+
+
     }
 
 
+}
+
+class Session extends Thread{
+
+    private final Socket SOCKET;
+
+    Session(Socket socketForClient) {
+        this.SOCKET = socketForClient;
+    }
 }
