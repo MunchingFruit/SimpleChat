@@ -22,11 +22,15 @@ public class frmClient extends javax.swing.JFrame {
     private static String message;
     private String userName;
 
+    Socket socket = new Socket(IP, PORT);
+    DataInputStream input = new DataInputStream(socket.getInputStream());
+    DataOutputStream output = new DataOutputStream(socket.getOutputStream());
+
 
     /**
      * Creates new form frmClient
      */
-    public frmClient() {
+    public frmClient() throws IOException {
         initComponents();
     }
 
@@ -88,7 +92,12 @@ public class frmClient extends javax.swing.JFrame {
     private void btn_SendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SendActionPerformed
         
          message = txtField_Message.getText();
-         updateTextArea();
+        try {
+            output.writeUTF(message);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Message could not be sent");
+        }
+        updateTextArea();
 
 
     }//GEN-LAST:event_btn_SendActionPerformed
@@ -100,29 +109,12 @@ public class frmClient extends javax.swing.JFrame {
     }
 
 
-    private static void run(){
+
+
+    public static void run(){
         boolean isConnected = false;
 
-        try(
 
-            Socket socket = new Socket(IP, PORT);
-            DataInputStream input = new DataInputStream(socket.getInputStream());
-            DataOutputStream output = new DataOutputStream(socket.getOutputStream());
-            )
-
-        {
-            while(true) {
-                Thread.sleep(5000);
-                output.writeUTF(message);
-            }
-
-
-
-        }
-        catch(IOException | InterruptedException e){
-
-            System.out.println("IOException");
-            }
 
 
     }
@@ -161,7 +153,11 @@ public class frmClient extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmClient().setVisible(true);
+                try {
+                    new frmClient().setVisible(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
